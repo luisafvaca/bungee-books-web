@@ -1,6 +1,8 @@
 import React, {
    Component
 } from 'react';
+import { connect } from 'react-redux';
+
 import style from './App.scss';
 import classNames from 'classNames/bind';
 
@@ -47,8 +49,8 @@ function App ({ saludo, toDos, children }) {
       <p className={ css('app', 'app-coso') } onClick={ saludar } >Hola Mundo</p>
       <ul>
         {
-          toDos.map((todo) => {
-            return <li>{todo}</li>
+          toDos.map((todo, i) => {
+            return <li key={i}>{todo}</li>
           })
         }
       </ul>
@@ -57,4 +59,10 @@ function App ({ saludo, toDos, children }) {
   );
 }
 
-export default App;
+function mapStateToProps(state, ownState) {
+  return Object.assign({}, {
+    toDos: [ ...state.toDos ]
+  });
+}
+
+export default connect(mapStateToProps, null)(App);
