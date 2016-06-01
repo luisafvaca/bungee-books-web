@@ -38,7 +38,7 @@ const css = classNames.bind(style);
 //   }
 // }
 
-function App ({ saludo, toDos, children }) {
+function App ({ saludo, toDos, children, count, onClick }) {
 
   function saludar() {
     console.log(saludo);
@@ -46,7 +46,7 @@ function App ({ saludo, toDos, children }) {
 
   return (
     <div className={ style.app + ' ' + style['app-coso'] }>
-      <p className={ css('app', 'app-coso') } onClick={ saludar } >Hola Mundo</p>
+      <p className={ css('app', 'app-coso') } onClick={ onClick } >Hola Mundo {count}</p>
       <ul>
         {
           toDos.map((todo, i) => {
@@ -60,9 +60,15 @@ function App ({ saludo, toDos, children }) {
 }
 
 function mapStateToProps(state, ownState) {
-  return Object.assign({}, {
-    toDos: [ ...state.toDos ]
-  });
+  return Object.assign({}, state);
 }
 
-export default connect(mapStateToProps, null)(App);
+function mapDispatchToProps(dispatch, ownState) {
+  return {
+    onClick(e) {
+      dispatch({ type: 'INCREMET' });
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
