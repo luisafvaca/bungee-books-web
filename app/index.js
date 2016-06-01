@@ -6,20 +6,10 @@ import { createStore } from 'redux';
 
 import App from './components/App';
 
-const initialState = {
-  count: 0,
-  toDos: ['comprar la leche', 'comprar los huevos', 'comida pa los loritos']
-};
+import bungeBooksReducer from './reducer/bungee-books-reducer';
 
-const store = createStore((state = initialState, action) => {
-  switch (action.type) {
-    case 'INCREMET':
-      return state.count + 1;
-      break;
-    default:
-      return state;
-  }
-});
+const store = createStore(bungeBooksReducer);
+console.log(store);
 
 ReactDOM.render(
 <Provider store={store}>
