@@ -2,6 +2,9 @@ import React, {
    Component
 } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { increment } from '../actions/action-creators';
 
 import style from './App.scss';
 import classNames from 'classNames/bind';
@@ -38,10 +41,14 @@ const css = classNames.bind(style);
 //   }
 // }
 
-function App ({ saludo, toDos, children, count, onClick }) {
+function App ({ saludo, toDos, children, count, increment }) {
 
   function saludar() {
     console.log(saludo);
+  }
+
+  function onClick(e) {
+    increment();
   }
 
   return (
@@ -64,11 +71,9 @@ function mapStateToProps(state, ownState) {
 }
 
 function mapDispatchToProps(dispatch, ownState) {
-  return {
-    onClick(e) {
-      dispatch({ type: 'INCREMET' });
-    }
-  };
+  return bindActionCreators({
+    increment
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

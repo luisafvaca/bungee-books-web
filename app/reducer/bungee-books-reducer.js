@@ -5,7 +5,7 @@ const initialState = {
 
 const bungeBooksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'INCREMET':
+    case 'INCREMENT':
       return Object.assign({}, state, {
         count: state.count + 1
       });
