@@ -4,7 +4,7 @@ import React, {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { increment } from '../actions/action-creators';
+import { increment, decrement } from '../actions/action-creators';
 
 import style from './App.scss';
 import classNames from 'classNames/bind';
@@ -41,7 +41,7 @@ const css = classNames.bind(style);
 //   }
 // }
 
-function App ({ saludo, toDos, children, count, increment }) {
+function App ({ saludo, toDos, children, count, increment, decrement }) {
 
   function saludar() {
     console.log(saludo);
@@ -50,10 +50,18 @@ function App ({ saludo, toDos, children, count, increment }) {
   function onClick(e) {
     increment();
   }
+  function stopDecrement(e){
+    if(count <= 0 ) {
+      return;
+    } else {
+      decrement();
+    }
+  }
 
   return (
     <div className={ style.app + ' ' + style['app-coso'] }>
       <p className={ css('app', 'app-coso') } onClick={ onClick } >Hola Mundo {count}</p>
+      <button onClick={stopDecrement}> {count} </button>
       <ul>
         {
           toDos.map((todo, i) => {
@@ -72,7 +80,8 @@ function mapStateToProps(state, ownState) {
 
 function mapDispatchToProps(dispatch, ownState) {
   return bindActionCreators({
-    increment
+    increment,
+    decrement
   }, dispatch);
 }
 

@@ -9,7 +9,12 @@ const bungeBooksReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         count: state.count + 1
       });
-      break;
+    break;
+    case 'DECREMENT':
+      return Object.assign({}, state, {
+        count: state.count - 1
+      })
+    break;
     default:
       return state;
   }
