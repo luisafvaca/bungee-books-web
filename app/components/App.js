@@ -74,8 +74,8 @@ function mapStateToProps(state, ownState) {
 
 function mapDispatchToProps(dispatch, ownState) {
   return bindActionCreators({
-    increment ,
-    decrement
+    increment: increment,
+    decrement: decrement
   }, dispatch);
 }
 
